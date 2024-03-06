@@ -1,0 +1,13 @@
+steps:
+  # Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/test1-416412/vite-app', '.']
+  # Push the Docker image to Google Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/test1-416412/vite-app']
+  # Deploy the image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    args: ['run', 'deploy', 'vite-app', '--image', 'gcr.io/test1-416412/vite-app', '--region', 'us-central1', '--platform', 'managed', '--allow-unauthenticated']
+images:
+  - 'gcr.io/test1-416412/vite-app'
+timeout: '1600s' # You can adjust this value based on your needs

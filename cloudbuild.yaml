@@ -7,6 +7,7 @@ steps:
     args: ['push', 'gcr.io/test1-416412/vite-app']
   # Deploy the image to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
     args: ['run', 'deploy', 'vite-app', '--image', 'gcr.io/test1-416412/vite-app', '--region', 'us-central1', '--platform', 'managed', '--allow-unauthenticated']
 images:
   - 'gcr.io/test1-416412/vite-app'
